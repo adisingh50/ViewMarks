@@ -1,5 +1,16 @@
 const router = require("express").Router();
 const Post = require(".././models/post.model");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
 
 //main get request called by the primary 3 screens of the app
 router.route("/viewPosts").get((req, res) => {
@@ -16,7 +27,7 @@ router.route("/addPost").post((req, res) => {
   const newPost = new Post({
     title: req.body.title,
     description: req.body.description,
-    image: req.body.image,
+    imagePath: req.body.imagePath,
     latitude: req.body.latitude,
     longitude: req.body.longitude,
     numLikes: 0,
@@ -28,6 +39,11 @@ router.route("/addPost").post((req, res) => {
     .save()
     .then(() => res.status(200).json({ added: newPost }))
     .catch((err) => res.status(400).json("Error: " + err));
+});
+
+//image post request - adds image to uploads folder
+router.route("/addImage").post(upload.single("image"), (req, res) => {
+  res.status(200).json({ imagePath: req.file.originalname });
 });
 
 module.exports = router;
