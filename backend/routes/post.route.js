@@ -27,7 +27,7 @@ router.route("/addPost").post(upload.single("image"), (req, res) => {
   const newPost = new Post({
     title: req.body.title,
     description: req.body.description,
-    imagePath: req.file.originalname, //make sure you the pass the actual picture file as 'image;
+    imagePath: req.file.originalname,
     latitude: req.body.latitude,
     longitude: req.body.longitude,
     numLikes: 0,
