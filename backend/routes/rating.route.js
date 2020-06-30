@@ -22,7 +22,7 @@ router.route("/removeLike/:id").post((req, res) => {
 
     post
       .save()
-      .then(() => res.status(200).json("Num Likes Decremented for Post"))
+      .then(() => res.status(200).json({ updatedLikes: newLikes }))
       .catch((err) => res.status(400).json("Error: " + err));
   });
 });
