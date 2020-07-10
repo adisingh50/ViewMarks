@@ -1,2 +1,2 @@
 # ViewMarks
-A Mobile App that allows user to snap views they see, add comments, and see other aesthetic views.
+A mobile application that allows users to share aesthetic views that they see out in the world. They can also look at other people's favorite view captures and leave ratings. 
